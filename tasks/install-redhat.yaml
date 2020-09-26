@@ -32,6 +32,7 @@
     enabled: yes
     gpgcheck: no
     repo_gpgcheck: no
+    description: "RabbitMQ repository for packages"
   become: true
 
 - name: Installing RabbitMQ on nodes

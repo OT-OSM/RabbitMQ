@@ -1,0 +1,5 @@
+---
+- hosts: rabbitmq
+  remote_user: ec2-user
+  roles:
+    - osm_rabbitmq

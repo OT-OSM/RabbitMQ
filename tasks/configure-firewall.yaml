@@ -1,0 +1,19 @@
+---
+- name: Checking firewall service is active or not
+  service_facts:
+  register: service_status
+
+- name: Configuring RabbitMQ ports in firewall
+  ansible.posix.firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 15672
+    - 5672
+    - 4369
+    - 25672
+    - 15692
+  become: true
+  when: >
+    service_state.ansible_facts.services["firewalld.service"].state == "running"

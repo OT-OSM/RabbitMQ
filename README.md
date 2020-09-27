@@ -36,5 +36,5 @@ Roles variables are categorized into two divisions i.e. Mandatory and Optional.
 | default_user | rabbitmq | *Username* | string | Default username for rabbitmq |
 | default_password | Strong@321 | *Password* | string | Default password for rabbitmq user |
 | cluster_partition_strategy | autoheal | <ul><li>autoheal</li><li>pause_minority</li><li>pause_if_all_down</li></ul> | string | Default partitining strategy for rabbitmq cluster |
-| rabbitmq_plugins | ul><li>rabbitmq_management</li><li>rabbitmq_prometheus</li></ul> | *Plugin Name* | list | List of plugins which needs to be installed |
+| rabbitmq_plugins | <ul><li>rabbitmq_management</li><li>rabbitmq_prometheus</li></ul> | *Plugin Name* | list | List of plugins which needs to be installed |
 

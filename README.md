@@ -38,3 +38,34 @@ Roles variables are categorized into two divisions i.e. Mandatory and Optional.
 | cluster_partition_strategy | autoheal | <ul><li>autoheal</li><li>pause_minority</li><li>pause_if_all_down</li></ul> | string | Default partitining strategy for rabbitmq cluster |
 | rabbitmq_plugins | <ul><li>rabbitmq_management</li><li>rabbitmq_prometheus</li></ul> | *Plugin Name* | list | List of plugins which needs to be installed |
 
+
+### Usage
+
+The inventory for rabbitmq role should look like this:-
+
+```ini
+[rabbitmq]
+rabbitmqnode1 ansible_ssh_host=34.210.213.107 node_type=master
+rabbitmqnode2 ansible_ssh_host=35.167.30.255 node_type=follower
+rabbitmqnode3 ansible_ssh_host=34.212.230.40 node_type=follower
+
+[rabbitmq:vars]
+ansible_ssh_user=ec2-user
+```
+
+**Make sure your first node should have node_type=master**
+
+An example playbook should look like this:-
+
+```yaml
+---
+- hosts: rabbitmq
+  roles:
+    - rabbitmq
+```
+
+and for running the ansible role, we will use ansible cli.
+
+```shell
+ansible-playbook -i tests/inventory tests/test.yml
+```

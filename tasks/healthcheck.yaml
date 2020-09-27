@@ -7,3 +7,4 @@
 - name: Checking RabbitMQ process status
   command: rabbitmqctl ping
   changed_when: false
+  become: true

@@ -22,3 +22,6 @@
 - name: Including tasks to create RabbitMQ cluster
   include_tasks: configure-cluster.yaml
   when: create_cluster
+
+- name: Including playbook for RabbitMQ nodes healthcheck
+  include_tasks: healthcheck.yaml

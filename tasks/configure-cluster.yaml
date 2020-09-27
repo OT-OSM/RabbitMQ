@@ -19,9 +19,9 @@
 
 - name: Setting up the fact for master node
   set_fact:
-    rabbitmq_master_node: "{{ inventory_hostname }}"
-  when: >
-    node_type == "master"
+    rabbitmq_master_node: "{{ groups['rabbitmq'][0] }}"
+  # when: >
+  #   node_type == "master"
 
 - name: Joining RabbitMQ master node for cluster
   command: >-

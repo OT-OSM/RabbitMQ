@@ -8,3 +8,7 @@
   become: true
   with_items:
     - "{{ groups['rabbitmq'] }}"
+
+- name: Setting up hostname of RabbitMQ nodes
+  hostname:
+    name: "{{ inventory_hostname }}"

@@ -13,8 +13,8 @@
   set_fact:
     firewall_status: unknown
   when: >
-    service_status.ansible_facts.services["firewalld.service"] is not defined  
-  
+    service_status.ansible_facts.services["firewalld.service"] is not defined
+
 - name: Configuring RabbitMQ ports in firewall
   firewalld:
     port: "{{ item }}/tcp"

@@ -4,7 +4,7 @@ galaxy_info:
   description: Ansible role for setting up the rabbitmq cluster
   company: Opstree Solutions
 
-  license: license (GPL-2.0-or-later, MIT, etc)
+  license: MIT
 
   min_ansible_version: 2.9
 

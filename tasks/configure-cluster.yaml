@@ -10,31 +10,13 @@
   notify:
     - Restart RabbitMQ service
 
-- name: Stopping RabbitMQ application on follower nodes
-  command: rabbitmqctl stop_app
-  become: true
-  changed_when: false
-  when: >
-    node_type == "follower"
-
-- name: Setting up the fact for master node
-  set_fact:
-    rabbitmq_master_node: "{{ groups['rabbitmq'][0] }}"
-  # when: >
-  #   node_type == "master"
-
-- name: Joining RabbitMQ master node for cluster
-  command: >-
-    rabbitmqctl join_cluster rabbit@{{ rabbitmq_master_node }}
+- name: Check if RabbitMQ is already in cluster or not
+  command: rabbitmqctl cluster_status
+  register: cluster_status
   changed_when: false
   become: true
-  when: >
-    node_type == "follower"
 
-- name: Starting RabbitMQ application on follower nodes
-  command: >-
-    rabbitmqctl start_app
-  changed_when: false
-  become: true
+- name: Including playbook for cluster creation
+  include_tasks: create-cluster.yaml
   when: >
-    node_type == "follower"
+    cluster_status.stdout.find("rabbit@{{ groups['rabbitmq'][0] }}") == -1

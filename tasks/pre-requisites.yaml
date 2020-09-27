@@ -12,3 +12,4 @@
 - name: Setting up hostname of RabbitMQ nodes
   hostname:
     name: "{{ inventory_hostname }}"
+  become: true

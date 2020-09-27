@@ -1,7 +1,7 @@
 [rabbitmq]
-rabbitmqnode1 ansible_ssh_host=54.218.190.224 node_type=master
-rabbitmqnode2 ansible_ssh_host=54.70.74.221 node_type=follower
-rabbitmqnode3 ansible_ssh_host=54.190.35.227 node_type=follower
+rabbitmqnode1 ansible_ssh_host=34.210.213.107 node_type=master
+rabbitmqnode2 ansible_ssh_host=35.167.30.255 node_type=follower
+rabbitmqnode3 ansible_ssh_host=34.212.230.40 node_type=follower
 
 [rabbitmq:vars]
 ansible_ssh_user=ec2-user

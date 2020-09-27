@@ -1,5 +1,5 @@
 ---
-- name: Checking rundeck hosts are defined or not
+- name: Checking rabbitmq hosts are defined or not
   fail:
     msg: "Playbook execution failed due to missing or empty required group 'rabbitmq'"
   when: groups['rabbitmq'] is not defined or groups['rabbitmq'] | length == 0

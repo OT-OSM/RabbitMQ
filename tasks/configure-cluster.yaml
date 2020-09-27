@@ -19,7 +19,7 @@
 
 - name: Setting up the fact for master node
   set_fact:
-    rabbitmq_master_node: {{ inventory_hostname }}
+    rabbitmq_master_node: "{{ inventory_hostname }}"
   when: >
     node_type == "master"
 

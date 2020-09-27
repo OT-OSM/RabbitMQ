@@ -3,8 +3,20 @@
   service_facts:
   register: service_status
 
+- name: Getting status of firewalld service
+  set_fact:
+    firewall_status: service_status.ansible_facts.services["firewalld.service"].state
+  when: >
+    service_status.ansible_facts.services["firewalld.service"] is defined
+
+- name: Setting fact for firwall service status
+  set_fact:
+    firewall_status: unknown
+  when: >
+    service_status.ansible_facts.services["firewalld.service"] is not defined  
+  
 - name: Configuring RabbitMQ ports in firewall
-  ansible.posix.firewalld:
+  firewalld:
     port: "{{ item }}/tcp"
     permanent: yes
     state: enabled
@@ -16,4 +28,4 @@
     - 15692
   become: true
   when: >
-    service_state.ansible_facts.services["firewalld.service"].state == "running"
+    firewall_status == "running"

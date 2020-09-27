@@ -5,7 +5,7 @@
     dest: /var/lib/rabbitmq/.erlang.cookie
     owner: rabbitmq
     group: rabbitmq
-    mode: 0644
+    mode: 0400
   become: true
   notify:
     - Restart RabbitMQ service

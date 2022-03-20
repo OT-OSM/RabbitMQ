@@ -1,0 +1,22 @@
+---
+- name: Configuring erlang cookie for RabbitMQ nodes
+  template:
+    src: erlang.cookie.j2
+    dest: /var/lib/rabbitmq/.erlang.cookie
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+  become: true
+  notify:
+    - Restart RabbitMQ service
+
+- name: Check if RabbitMQ is already in cluster or not
+  command: rabbitmqctl cluster_status
+  register: cluster_status
+  changed_when: false
+  become: true
+
+- name: Including playbook for cluster creation
+  include_tasks: create-cluster.yaml
+  when: >
+    cluster_status.stdout.find("rabbit@{{ groups['rabbitmq'][0] }}") == -1

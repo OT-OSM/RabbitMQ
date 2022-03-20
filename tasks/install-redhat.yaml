@@ -1,0 +1,44 @@
+---
+- name: Updating yum cache for repo
+  yum:
+    update_cache: yes
+  become: true
+
+- name: Installing and configuring epel-release repo
+  yum:
+    name: epel-release
+    state: present
+  become: true
+
+- name: Installing RabbitMQ dependencies
+  yum:
+    name: erlang
+    state: present
+  become: true
+
+- name: Importing RPM key for RabbitMQ
+  rpm_key:
+    key: "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
+    - https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey
+
+- name: Adding yum repository for RabbitMQ
+  yum_repository:
+    name: bintray-rabbitmq-rpm
+    baseurl: https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.8.x/el/7/
+    enabled: yes
+    gpgcheck: no
+    repo_gpgcheck: no
+    description: "RabbitMQ repository for packages"
+  become: true
+
+- name: Installing RabbitMQ on nodes
+  yum:
+    name: rabbitmq-server
+    state: present
+  become: true
+  notify:
+    - Enable RabbitMQ service

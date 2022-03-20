@@ -1,0 +1,10 @@
+---
+- name: Waiting for RabbitMQ port to respond
+  wait_for:
+    port: 5672
+    delay: 10
+
+- name: Checking RabbitMQ process status
+  command: rabbitmqctl ping
+  changed_when: false
+  become: true

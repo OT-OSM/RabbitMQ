@@ -1,0 +1,9 @@
+---
+# vars file for osm_rabbitmq
+create_cluster: true
+
+rabbitmq_users:
+  - name: monitoring
+    password: "Strong@321"
+    tags: "monitoring"
+    vhosts: "/"

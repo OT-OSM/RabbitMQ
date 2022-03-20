@@ -1,0 +1,27 @@
+---
+- name: Stopping RabbitMQ application on follower nodes
+  command: rabbitmqctl stop_app
+  become: true
+  changed_when: false
+  when: >
+    node_type == "follower"
+
+- name: Setting up the fact for master node
+  set_fact:
+    rabbitmq_master_node: "{{ groups['rabbitmq'][0] }}"
+
+- name: Joining RabbitMQ master node for cluster
+  command: >-
+    rabbitmqctl join_cluster rabbit@{{ rabbitmq_master_node }}
+  changed_when: false
+  become: true
+  when: >
+    node_type == "follower"
+
+- name: Starting RabbitMQ application on follower nodes
+  command: >-
+    rabbitmqctl start_app
+  changed_when: false
+  become: true
+  when: >
+    node_type == "follower"

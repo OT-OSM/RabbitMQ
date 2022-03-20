@@ -1,0 +1,11 @@
+---
+# defaults file for osm_rabbitmq
+default_user: rabbitmq
+default_password: Strong@321
+cluster_partition_strategy: autoheal
+
+rabbitmq_plugins:
+  - rabbitmq_management
+  - rabbitmq_prometheus
+
+erlang_cookie: WKRBTTEQRYPTQOPUKSVF

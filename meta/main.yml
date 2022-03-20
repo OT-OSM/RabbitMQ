@@ -3,7 +3,7 @@ galaxy_info:
   author: Abhishek Dubey
   description: Ansible role for setting up the rabbitmq cluster
   company: Opstree Solutions
-
+  role_name: RabbitMQ
   license: MIT
 
   min_ansible_version: 2.9

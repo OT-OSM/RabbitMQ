@@ -6,9 +6,9 @@
 - name: Including playbook for RabbitMQ OS configurations
   include_tasks: pre-requisites.yaml
 
-- name: Including tasks to install RabbitMQ on RedHat
-  include_tasks: install-redhat.yaml
-  when: ansible_os_family == "RedHat"
+- name: Including tasks to install RabbitMQ on ub ubuntu
+  include_tasks: Install-ubuntu.yaml
+  when: ansible_os_family == "Debian"
 
 - name: Including playbook to configure RabbitMQ
   include_tasks: configure.yaml

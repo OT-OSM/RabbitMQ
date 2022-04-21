@@ -10,7 +10,11 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 7
+        - 8
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
 
   galaxy_tags: ["rabbitmq", "ansible", "automation", "opstree"]
 

@@ -9,7 +9,9 @@ Some of the highlighting features are:-
   - Management console setup for UI management
   - Prometheus metrics support for detailed insights
 
-This role supports RedHat family right now, other OS support is under construction.
+### Supported OS
+- Ubuntu 18 
+- Ubuntu 20
 
 ### Requirements
 
@@ -50,7 +52,7 @@ rabbitmqnode2 ansible_ssh_host=35.167.30.255 node_type=follower
 rabbitmqnode3 ansible_ssh_host=34.212.230.40 node_type=follower
 
 [rabbitmq:vars]
-ansible_ssh_user=ec2-user
+ansible_ssh_user=ubuntu
 ```
 
 **Make sure your first node should have node_type=master**
@@ -69,6 +71,8 @@ and for running the ansible role, we will use ansible cli.
 ```shell
 ansible-playbook -i tests/inventory tests/test.yml
 ```
-## Author
+## Authors
 
 **[Abhishek Dubey](abhishek.dubey@opstree.com)**
+
+**[Varghese Kurian](varghese.palamoottil@opstree.com)**

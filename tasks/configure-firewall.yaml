@@ -3,6 +3,10 @@
   service_facts:
   register: service_status
 
+- name: Print the gateway for each host when defined
+  ansible.builtin.debug:
+    msg: service_status.ansible_facts.services["firewalld.service"] 
+
 - name: Getting status of firewalld service
   set_fact:
     firewall_status: service_status.ansible_facts.services["firewalld.service"].state

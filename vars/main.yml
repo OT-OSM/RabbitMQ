@@ -7,3 +7,8 @@ rabbitmq_users:
     password: "Strong@321"
     tags: "monitoring"
     vhosts: "/"
+    
+key_details:
+    - { url: "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA", destination: "/usr/share/keyrings/com.rabbitmq.team.gpg" }  
+    - { url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf77f1eda57ebb1cc", destination: "/usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg" }
+    - { url: "https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey", destination: "/usr/share/keyrings/io.packagecloud.rabbitmq.gpg" }

@@ -16,3 +16,6 @@
   become: true
   with_items:
     - "{{ rabbitmq_plugins }}"
+
+- name: Running all handlers for RabbitMQ nodes
+  meta: flush_handlers

@@ -1,0 +1,40 @@
+---
+
+- name: installing prerequist package
+  apt:
+    update_cache: "yes"
+    name: ['curl', 'gnupg', 'apt-transport-https']
+    state: present
+
+- name: Adding Launchpad PPA that provides modern Erlang releases & PackageCloud RabbitMQ repository
+  ansible.builtin.apt_key:
+    url: "{{ item.url }}"
+    keyring: "{{ item.destination }}"
+    state: present
+  loop: "{{ key_details }}"
+
+- name: Add apt repositories maintained by Team RabbitMQ
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - deb-src [signed-by=/usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu bionic main
+    - deb [signed-by=/usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu bionic main
+    - deb [signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main
+    - deb-src [signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main
+
+- name: Updating yum cache for repo
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Installing RabbitMQ on nodes
+  apt:
+    name: rabbitmq-server
+    state: present
+  become: true
+
+- name: Running all handlers for RabbitMQ nodes
+  meta: flush_handlers
+  

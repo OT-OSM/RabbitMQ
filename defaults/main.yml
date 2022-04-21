@@ -9,3 +9,9 @@ rabbitmq_plugins:
   - rabbitmq_prometheus
 
 erlang_cookie: WKRBTTEQRYPTQOPUKSVF
+
+downloads:
+  - { dest: "/tmp/erlang/", url: "https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh" }
+  - { dest: "/tmp/rabbitmq-server/", url: "https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh" }
+
+executing: bash /tmp/erlang/script.rpm.sh 
